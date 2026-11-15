@@ -60,9 +60,10 @@ public static class Setup
         var systems = new[] { "Hidráulica", "Frenado", "Tracción", "Climatización", "Estructura", "Señalización" }.Select(n => new TechnicalSystem { ProductId = product.Id, Name = n }).ToArray();
         db.Systems.AddRange(systems);
         var supplier = new Supplier { Name = "Componentes Atlas · Ficticio" }; db.Suppliers.Add(supplier);
+        var systemByPart = new[] { 0, 0, 1, 1, 0, 3 };
         var names = new[] { "Junta tórica 12 mm", "Filtro hidráulico", "Válvula de seguridad", "Disco de freno", "Sensor de presión", "Bomba de circulación" };
         var faker = new Faker("es"); faker.Random = new Randomizer(42);
-        var parts = Enumerable.Range(0, 36).Select(i => new Part { Code = $"ATL-{i + 1:0000}", Name = names[i % names.Length] + (i < 6 ? "" : $" · Serie {i / 6 + 1}"), Specification = $"Catálogo ficticio. Material {faker.PickRandom("acero inoxidable", "elastómero NBR", "aluminio")}; inspección cada {faker.Random.Int(2, 8) * 1000} km.", SystemId = systems[i % systems.Length].Id, SupplierId = supplier.Id }).ToArray();
+        var parts = Enumerable.Range(0, 36).Select(i => new Part { Code = $"ATL-{i + 1:0000}", Name = names[i % names.Length] + (i < 6 ? "" : $" · Serie {i / 6 + 1}"), Specification = $"Catálogo ficticio. Material {faker.PickRandom("acero inoxidable", "elastómero NBR", "aluminio")}; inspección cada {faker.Random.Int(2, 8) * 1000} km.", SystemId = systems[systemByPart[i % systemByPart.Length]].Id, SupplierId = supplier.Id }).ToArray();
         db.Parts.AddRange(parts);
         await db.SaveChangesAsync(ct);
         var svc = scope.ServiceProvider.GetRequiredService<DocumentService>();
@@ -70,7 +71,7 @@ public static class Setup
         for (var i = 0; i < 12; i++)
         {
             var p = parts[i];
-            var id = await svc.CreateAsync(new($"MP-{i + 1:000}", titles[i % 6] + (i > 5 ? " · Inspección extendida" : ""), systems[i % systems.Length].Id,
+            var id = await svc.CreateAsync(new($"MP-{i + 1:000}", titles[i % 6] + (i > 5 ? " · Inspección extendida" : ""), p.SystemId,
             [new("heading", "Preparación y seguridad"), new("warning", "Procedimiento ficticio para demostración. No utilizar en mantenimiento real."), new("step", "Aislar el circuito, comprobar presión cero y registrar el número de serie de la pieza.", p.Code), new("step", $"Retirar {p.Name.ToLowerInvariant()}, limpiar el alojamiento e instalar el recambio indicado en la ficha.", p.Code), new("table", "Control | Criterio\nEstanqueidad | Sin fugas\nIdentificación | Código coincidente"), new("step", "Verificar estanqueidad y registrar el resultado de la intervención.")], [p.Id]), users[0].Id, ct);
             if (i % 3 != 0)
             {

@@ -63,7 +63,7 @@ flowchart LR
 
 ## Calidad y decisiones
 
-21 pruebas automáticas, incluida integración con Testcontainers/SQL Server. Comprueban separación de funciones, autenticación, acceso de solo lectura, edición concurrente, referencias inválidas, XML sin entidades externas, impacto, conservación de versiones, búsqueda y generación de PDF.
+22 pruebas automáticas, incluida integración con Testcontainers/SQL Server. Comprueban separación de funciones, autenticación, acceso de solo lectura, edición concurrente, referencias inválidas, XML sin entidades externas, impacto, conservación de versiones, búsqueda y generación de PDF.
 
 ```bash
 dotnet test

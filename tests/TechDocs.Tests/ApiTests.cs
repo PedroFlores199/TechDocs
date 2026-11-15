@@ -27,6 +27,15 @@ public sealed class ApiFactory : WebApplicationFactory<Program>
 }
 public sealed class ApiTests(ApiFactory factory) : IClassFixture<ApiFactory>
 {
+    [Fact]
+    public async Task BrakingComponentsBelongToTheBrakingSystem()
+    {
+        using var client = await factory.Login("Lector");
+        var result = await client.GetFromJsonAsync<JsonElement>("/api/parts?q=Disco");
+        var items = result.GetProperty("items").EnumerateArray().ToArray();
+        items.Should().NotBeEmpty();
+        items.All(x => x.GetProperty("system").GetString() == "Frenado").Should().BeTrue();
+    }
     [Fact] public async Task AuthenticationIsRequired() { var r = await factory.CreateClient().GetAsync("/api/documents"); r.StatusCode.Should().Be(HttpStatusCode.Unauthorized); }
     [Fact] public async Task ReaderCannotCreateDocuments() { using var c = await factory.Login("Lector"); var r = await c.PostAsJsonAsync("/api/documents", new { code = "MP-FAIL", title = "Test", systemId = Guid.NewGuid(), blocks = new[] { new { type = "step", text = "Hello" } }, partIds = Array.Empty<Guid>() }); r.StatusCode.Should().Be(HttpStatusCode.Forbidden); }
     [Fact] public async Task SearchIgnoresAccents() { using var c = await factory.Login("Lector"); var json = await c.GetFromJsonAsync<JsonElement>("/api/documents?q=junta%20torica"); json.GetProperty("total").GetInt32().Should().BeGreaterThan(0); }

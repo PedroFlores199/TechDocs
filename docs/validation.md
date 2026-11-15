@@ -1,6 +1,6 @@
 # Validación
 
-Validado en macOS ARM64 con SDK .NET 10.0.404, Node 22 y Docker Desktop. La solución y el frontend compilan; 21 pruebas pasan con `RUN_CONTAINER_TESTS=1`, incluida SQL Server real en contenedor amd64.
+Validado en macOS ARM64 con SDK .NET 10.0.404, Node 22 y Docker Desktop. La solución y el frontend compilan; 22 pruebas pasan con `RUN_CONTAINER_TESTS=1`, incluida SQL Server real en contenedor amd64.
 
 Cobertura funcional: JWT y roles, flujo de revisión/aprobación, concurrencia de piezas, versiones y su contenido anterior, referencias inválidas, búsqueda sin acentos, exportación PDF, parseo XML y bloqueo de entidades externas. El despliegue completo utiliza MongoDB, Elasticsearch, Redis y SQL Server; el modo local tiene adaptadores expresos.
 
