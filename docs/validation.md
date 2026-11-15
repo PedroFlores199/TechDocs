@@ -7,3 +7,5 @@ Cobertura funcional: JWT y roles, flujo de revisión/aprobación, concurrencia d
 El benchmark de persistencia comprueba el recuento de las 50.000 filas antes y después de cada método. Una sola ejecución sirve para documentar el experimento, no para establecer una garantía de rendimiento.
 
 El README describe las funciones opcionales y los límites del modo local. Las imágenes de bloques son enlaces HTTPS; no se descarga contenido remoto durante la exportación. Las cuentas, contraseñas y catálogo son únicamente de demostración. No se incluye una afirmación de auditoría externa ni de ausencia absoluta de defectos.
+
+Despliegue completo comprobado con Docker Compose. El recorrido HTTP comprueba permisos, resultados y archivos exportados. Importación medida: 5.000 piezas válidas en 2,66 s; Excel de ejemplo con 2 aceptadas/2 rechazadas y XML con 1 aceptada. Se ha probado también la recuperación de la outbox y la búsqueda semántica local del procedimiento del filtro hidráulico.

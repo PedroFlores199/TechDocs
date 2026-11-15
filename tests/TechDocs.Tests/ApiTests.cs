@@ -16,7 +16,7 @@ public sealed class ApiFactory : WebApplicationFactory<Program>
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         Directory.CreateDirectory(directory);
-        builder.ConfigureAppConfiguration((_, c) => c.AddInMemoryCollection(new Dictionary<string, string?> { { "Storage:Mode", "Local" }, { "Storage:Directory", Path.Combine(directory, "versions") }, { "ConnectionStrings:Sqlite", "Data Source=" + Path.Combine(directory, "test.db") } }));
+        builder.ConfigureAppConfiguration((_, c) => c.AddInMemoryCollection(new Dictionary<string, string?> { { "Storage:Mode", "Local" }, { "Storage:Directory", Path.Combine(directory, "versions") }, { "ConnectionStrings:Sqlite", "Data Source=" + Path.Combine(directory, "test.db") + ";Pooling=False" } }));
     }
     public async Task<HttpClient> Login(string role)
     {
