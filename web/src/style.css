@@ -41,13 +41,13 @@ button:disabled {
 }
 a:focus-visible,
 button:focus-visible {
-  outline: #c69b54 solid 3px;
+  outline: #17541f solid 2px;
   outline-offset: 4px;
 }
 input:focus,
 select:focus,
 textarea:focus {
-  outline: #ad8b53 solid 2px;
+  outline: #17541f solid 2px;
   outline-offset: 1px;
 }
 h1 {

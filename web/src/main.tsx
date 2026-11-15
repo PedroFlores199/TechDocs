@@ -433,7 +433,7 @@ function App() {
         >
           <BookOpen size={27} />
           <span>
-            TechDocs<small>GESTOR DOCUMENTAL</small>
+            TechDocs<small>Gestor documental</small>
           </span>
         </a>
         <div className="workspace">
@@ -583,7 +583,7 @@ function App() {
           )}
           <div className="page-heading">
             <div>
-              <span className="eyebrow">ATLAS R-240 / DOCUMENT CONTROL</span>
+              <span className="eyebrow">Atlas R-240 / Control documental</span>
               <h1>
                 {
                   (
@@ -1277,7 +1277,7 @@ function App() {
           >
             <div className="modal-header">
               <span className="eyebrow">
-                {detail.code} / VERSIÓN {detail.version}
+                {detail.code} / Versión {detail.version}
               </span>
               <button
                 aria-label="Cerrar documento"
@@ -1680,7 +1680,7 @@ function App() {
           >
             <div className="modal-header">
               <span className="eyebrow">
-                {partDetail.code} / REVISIÓN {partDetail.revision}
+                {partDetail.code} / Revisión {partDetail.revision}
               </span>
               <button
                 aria-label="Cerrar ficha"
