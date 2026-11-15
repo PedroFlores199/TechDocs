@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><TargetFramework>net10.0</TargetFramework></PropertyGroup>
+<ItemGroup><PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.2.0" /><ProjectReference Include="../TechDocs.Domain/TechDocs.Domain.csproj" /></ItemGroup>
+
+</Project>

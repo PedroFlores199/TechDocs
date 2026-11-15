@@ -1,0 +1,16 @@
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+**/TestResults/
+**/.vs/
+.env
+*.db
+*.db-shm
+*.db-wal
+*.user
+.DS_Store
+artifacts/
+**/app_data/
+src/TechDocs.Api/wwwroot/
+web/*.tsbuildinfo

@@ -1,0 +1,11 @@
+{
+  "rows": 50000,
+  "efMilliseconds": 6612.1352,
+  "bulkMilliseconds": 1605.1399,
+  "speedup": 4.119351341275611,
+  "efCount": 50000,
+  "bulkCount": 50000,
+  "at": "2026-11-15T16:29:17.089778+00:00",
+  "environment": "macOS 27.2.0",
+  "notes": "Una ejecuci\u00F3n; incluye AddRange/SaveChanges y WriteToServer. La preparaci\u00F3n del DataTable no entra en Bulk. No es un ensayo estad\u00EDstico."
+}

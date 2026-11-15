@@ -1,0 +1,68 @@
+name: techdocs
+x-app-environment: &app-environment
+  Storage__Mode: Full
+  ConnectionStrings__SqlServer: Server=sqlserver;Database=TechDocs;User Id=sa;Password=${SQL_PASSWORD:-TechDocs_Demo_2026!};TrustServerCertificate=True
+  ConnectionStrings__Mongo: mongodb://mongo:27017
+  ConnectionStrings__Redis: redis:6379
+  Search__Url: http://elasticsearch:9200/
+  Jwt__Key: ${JWT_KEY:-techdocs-isolated-local-demo-signing-key-2026}
+  Seq__Url: http://seq:5341
+  Embeddings__Enabled: ${AI_ENABLED:-false}
+  Embeddings__Url: http://ollama:11434
+  Embeddings__Model: nomic-embed-text
+services:
+  api:
+    build: { context: ., target: api }
+    ports: ["127.0.0.1:5080:8080"]
+    environment: *app-environment
+    depends_on:
+      sqlserver: { condition: service_healthy }
+      mongo: { condition: service_healthy }
+      redis: { condition: service_healthy }
+      elasticsearch: { condition: service_healthy }
+    healthcheck: { test: ["CMD", "curl", "-f", "http://localhost:8080/health/ready"], interval: 10s, timeout: 5s, retries: 12, start_period: 45s }
+  worker:
+    build: { context: ., target: worker }
+    environment: *app-environment
+    depends_on: { api: { condition: service_healthy } }
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    environment: { ACCEPT_EULA: "Y", MSSQL_SA_PASSWORD: "${SQL_PASSWORD:-TechDocs_Demo_2026!}", MSSQL_MEMORY_LIMIT_MB: "2048" }
+    volumes: ["sql-data:/var/opt/mssql"]
+    healthcheck: { test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q 'SELECT 1' -b -o /dev/null"], interval: 10s, timeout: 5s, retries: 30, start_period: 30s }
+  mongo:
+    image: mongo:8.0
+    volumes: ["mongo-data:/data/db"]
+    healthcheck: { test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"], interval: 10s, timeout: 5s, retries: 15 }
+  redis:
+    image: redis:7.4-alpine
+    healthcheck: { test: ["CMD", "redis-cli", "ping"], interval: 10s, timeout: 3s, retries: 15 }
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    environment: { discovery.type: single-node, xpack.security.enabled: "false", ES_JAVA_OPTS: "-Xms512m -Xmx512m" }
+    volumes: ["search-data:/usr/share/elasticsearch/data"]
+    healthcheck: { test: ["CMD-SHELL", "curl -fsS 'http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=3s'"], interval: 10s, timeout: 5s, retries: 30 }
+  seq:
+    image: datalust/seq:2025.2
+    profiles: [observability]
+    environment: { ACCEPT_EULA: "Y", SEQ_FIRSTRUN_NOAUTHENTICATION: "true" }
+    ports: ["127.0.0.1:5341:80"]
+    volumes: ["seq-data:/data"]
+  ollama:
+    image: ollama/ollama:0.13.0
+    profiles: [ai]
+    volumes: ["models:/root/.ollama"]
+    healthcheck: { test: ["CMD", "ollama", "list"], interval: 10s, retries: 20 }
+  model-init:
+    image: ollama/ollama:0.13.0
+    profiles: [ai]
+    environment: { OLLAMA_HOST: "http://ollama:11434" }
+    depends_on: { ollama: { condition: service_healthy } }
+    entrypoint: ["ollama", "pull", "nomic-embed-text"]
+volumes:
+  sql-data:
+  mongo-data:
+  search-data:
+  seq-data:
+  models:

@@ -1,0 +1,20 @@
+using System.Data;
+using System.Diagnostics;
+using System.Text.Json;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using TechDocs.Domain;
+using TechDocs.Infrastructure;
+
+var connection=Environment.GetEnvironmentVariable("BENCHMARK_SQL")??throw new InvalidOperationException("Configura BENCHMARK_SQL apuntando a una base de datos de benchmark vacía.");
+await using var db=new TechDocsDb(new DbContextOptionsBuilder<TechDocsDb>().UseSqlServer(connection).Options);
+await db.Database.EnsureCreatedAsync();
+if(await db.Parts.AnyAsync())throw new InvalidOperationException("La base debe estar vacía.");
+var product=new Product{Code="BENCH",Name="Benchmark"};var system=new TechnicalSystem{ProductId=product.Id,Name="Bench"};var supplier=new Supplier{Name="Bench"};db.AddRange(product,system,supplier);await db.SaveChangesAsync();
+var parts=Enumerable.Range(1,50000).Select(i=>new Part{Code=$"B-{i:00000}",Name=$"Pieza ficticia {i}",SystemId=system.Id,SupplierId=supplier.Id,Specification="Ensayo sintético determinista"}).ToArray();
+var watch=Stopwatch.StartNew();db.Parts.AddRange(parts);await db.SaveChangesAsync();var ef=watch.Elapsed.TotalMilliseconds;var efCount=await db.Parts.CountAsync();db.ChangeTracker.Clear();await db.Parts.ExecuteDeleteAsync();
+var table=new DataTable();foreach(var (name,type) in new[]{("Id",typeof(Guid)),("Code",typeof(string)),("Name",typeof(string)),("SystemId",typeof(Guid)),("SupplierId",typeof(Guid)),("Specification",typeof(string)),("Revision",typeof(int)),("UpdatedAt",typeof(DateTimeOffset))})table.Columns.Add(name,type);
+foreach(var p in parts)table.Rows.Add(p.Id,p.Code,p.Name,p.SystemId,p.SupplierId,p.Specification,p.Revision,p.UpdatedAt);
+await using var sql=new SqlConnection(connection);await sql.OpenAsync();using var bulk=new SqlBulkCopy(sql){DestinationTableName="Parts",BatchSize=5000};foreach(DataColumn c in table.Columns)bulk.ColumnMappings.Add(c.ColumnName,c.ColumnName);
+watch.Restart();await bulk.WriteToServerAsync(table);var bulkMs=watch.Elapsed.TotalMilliseconds;var bulkCount=await db.Parts.CountAsync();if(efCount!=50000||bulkCount!=50000)throw new InvalidOperationException("Recuento incorrecto.");
+Console.WriteLine(JsonSerializer.Serialize(new{rows=50000,efMilliseconds=ef,bulkMilliseconds=bulkMs,speedup=ef/bulkMs,efCount,bulkCount,at=DateTimeOffset.UtcNow,environment=System.Runtime.InteropServices.RuntimeInformation.OSDescription,notes="Una ejecución; incluye AddRange/SaveChanges y WriteToServer. La preparación del DataTable no entra en Bulk. No es un ensayo estadístico."},new JsonSerializerOptions{WriteIndented=true}));
