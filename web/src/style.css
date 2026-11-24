@@ -41,13 +41,13 @@ button:disabled {
 }
 a:focus-visible,
 button:focus-visible {
-  outline: #17541f solid 2px;
+  outline: #2a3644 solid 2px;
   outline-offset: 4px;
 }
 input:focus,
 select:focus,
 textarea:focus {
-  outline: #17541f solid 2px;
+  outline: #2a3644 solid 2px;
   outline-offset: 1px;
 }
 h1 {
@@ -130,8 +130,8 @@ nav button:hover {
 nav button b {
   margin-left: auto;
   border-radius: 3px;
-  background: #e1e6e2;
-  color: #17541f;
+  background: #e2e3e5;
+  color: #2a3644;
   font-size: 11px;
   padding: 2px 6px;
 }
@@ -146,7 +146,7 @@ nav button b {
   width: 6px;
   height: 6px;
   border-radius: 100%;
-  background: #74a78e;
+  background: #838d98;
   display: inline-block;
 }
 .environment .dot {
@@ -1168,9 +1168,9 @@ h2 {
   gap: 8px;
 }
 .workspace-icon {
-  background: #e3e9e5;
-  border: 1px solid #d4ddd7;
-  color: #47745a;
+  background: #e5e6e7;
+  border: 1px solid #d6d8db;
+  color: #545d67;
   font-family: inherit;
   font-size: 17px;
   width: 31px;
@@ -1219,10 +1219,10 @@ nav button.active {
 }
 .topbar {
   border-bottom: 0;
-  color: #d4e4da;
+  color: #d8dce0;
 }
 .topbar > a {
-  color: #d9e9df;
+  color: #dde1e5;
   font-size: 12px;
 }
 .page-heading {
@@ -1453,10 +1453,10 @@ nav button.active {
 }
 .mini-flow {
   margin-top: 20px;
-  color: #70917c;
+  color: #7a8087;
 }
 .mini-flow span {
-  background: #d5e1d9;
+  background: #d8dbde;
 }
 .upload-panel {
   background: #fff;
@@ -1464,12 +1464,12 @@ nav button.active {
   padding: 30px;
 }
 .upload-icon {
-  background: #edf3ef;
-  border: 1px solid #d8e4dc;
+  background: #eff0f1;
+  border: 1px solid #dbdee1;
   border-radius: 4px;
   width: 52px;
   height: 52px;
-  color: #5d8a6b;
+  color: #6a737d;
 }
 .upload-panel h2 {
   font-size: 24px;
@@ -1479,7 +1479,7 @@ nav button.active {
   max-width: 540px;
 }
 .upload-panel a {
-  color: #286347;
+  color: #394552;
 }
 .import-row .file-icon {
   width: 33px;
@@ -1566,10 +1566,10 @@ nav button.active {
 }
 .file-icon {
   background: #f0f3f5;
-  color: #789187;
+  color: #7f848a;
 }
 .mobile-menu {
-  color: #f4f9f5;
+  color: #f5f6f8;
 }
 @media (max-width: 1100px) {
   .page-heading {
@@ -1727,7 +1727,7 @@ nav button.active {
     sans-serif;
   color: #212529;
   background: #f4f6f6;
-  --reference-green: #17541f;
+  --reference-green: #2a3644;
 }
 .stat strong,
 h1,
@@ -1747,7 +1747,7 @@ h3 {
 }
 .brand {
   height: 64px;
-  background: #17541f;
+  background: #2a3644;
   color: #fff;
   padding: 0 23px;
   font-size: 25px;
@@ -1757,7 +1757,7 @@ h3 {
 }
 .topbar {
   height: 64px;
-  background: #17541f;
+  background: #2a3644;
   padding: 0 25px;
   gap: 25px;
 }
@@ -1768,11 +1768,11 @@ h3 {
   max-width: 620px;
   width: 65%;
   margin: auto;
-  background: #124319;
+  background: #202a35;
   border: 1px solid #ffffff40;
   border-radius: 6px;
   padding: 0 12px;
-  color: #a6c2aa;
+  color: #aeb4ba;
   height: 36px;
 }
 .global-search input {
@@ -1784,7 +1784,7 @@ h3 {
   padding: 0;
 }
 .global-search input::placeholder {
-  color: #a6c2aa;
+  color: #aeb4ba;
 }
 .global-search input:focus {
   outline: 0;
@@ -1806,7 +1806,7 @@ h3 {
   color: #212529;
 }
 .header-account button {
-  color: #d8e8db;
+  color: #dce0e4;
   padding: 0;
 }
 .workspace {
@@ -1815,10 +1815,10 @@ h3 {
   border: 0;
 }
 .workspace strong {
-  color: #66706e;
+  color: #696b6d;
 }
 .workspace small {
-  color: #989e9b;
+  color: #9a9b9c;
 }
 .nav-label {
   color: #929894;
@@ -1826,7 +1826,7 @@ h3 {
   padding: 0 24px 8px;
 }
 nav button {
-  color: #303632;
+  color: #323334;
   font-weight: 400;
   padding: 12px 14px;
   gap: 12px;
@@ -1835,14 +1835,14 @@ nav button {
   width: calc(100% - 18px);
 }
 nav button.active {
-  background: #dce5de;
-  color: #17541f;
+  background: #dee0e3;
+  color: #2a3644;
   padding-left: 14px;
   font-weight: 600;
 }
 nav button:hover {
-  background: #e7ebe8;
-  color: #17541f;
+  background: #e8e9ea;
+  color: #2a3644;
 }
 .saved-views {
   margin-top: 28px;
@@ -1854,7 +1854,7 @@ nav button:hover {
   align-items: center;
   padding: 12px 24px;
   text-align: left;
-  color: #515a54;
+  color: #545557;
 }
 .saved-views button b {
   border-radius: 5px;
@@ -1865,12 +1865,12 @@ nav button:hover {
   font-size: 12px;
 }
 .saved-views button:hover {
-  background: #e7ebe8;
+  background: #e8e9ea;
 }
 .environment {
   border: 0;
   margin: 20px 24px;
-  color: #87948b;
+  color: #8b8d90;
   padding: 0;
 }
 main {
@@ -1895,19 +1895,19 @@ main {
   font-weight: 400;
 }
 .primary {
-  background: #17541f;
-  border-color: #17541f;
+  background: #2a3644;
+  border-color: #2a3644;
 }
 .primary:hover {
-  background: #113f17;
+  background: #1e2732;
 }
 .secondary {
-  color: #17541f;
-  border-color: #17541f;
+  color: #2a3644;
+  border-color: #2a3644;
   background: 0 0;
 }
 .secondary:hover {
-  background: #17541f;
+  background: #2a3644;
   color: #fff;
 }
 .toolbar {
@@ -1929,8 +1929,8 @@ main {
 }
 .toolbar select {
   padding: 8px 9px;
-  border-color: #17541f;
-  color: #17541f;
+  border-color: #2a3644;
+  color: #2a3644;
   border-radius: 5px;
   max-width: 190px;
   background: #fff;
@@ -1938,8 +1938,8 @@ main {
 .toolbar .reset-filters {
   margin-left: auto;
   white-space: nowrap;
-  color: #89918c;
-  border-color: #aab5ae;
+  color: #8b8d8f;
+  border-color: #adafb2;
   min-height: 35px;
   padding: 7px 11px;
 }
@@ -1962,7 +1962,7 @@ main {
   border: 1px solid #ced4da;
   border-radius: 5px;
   padding: 7px 9px;
-  color: #17541f;
+  color: #2a3644;
 }
 .document-table {
   background: 0 0;
@@ -1992,31 +1992,31 @@ main {
   border-color: #ced4da;
 }
 .document-table tr:hover {
-  background: #e8eeea;
+  background: #eaebec;
 }
 .document-table .selected-row {
-  background: #dce9df;
+  background: #dfe2e6;
 }
 .document-title {
   gap: 0;
-  color: #17541f;
+  color: #2a3644;
 }
 .document-title strong {
   font-family: inherit;
   font-weight: 400;
-  color: #17541f;
+  color: #2a3644;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 .document-table .reference-column {
-  color: #6b7870;
+  color: #6f7174;
   white-space: nowrap;
 }
 .document-table .mono {
-  color: #65756b;
+  color: #6a6d70;
 }
 input[type="checkbox"] {
-  accent-color: #17541f;
+  accent-color: #2a3644;
   width: 14px;
   height: 14px;
   margin: 0;
@@ -2044,7 +2044,7 @@ input[type="checkbox"] {
   color: #fff;
 }
 .open-document {
-  color: #7c8982;
+  color: #808285;
 }
 .editor-block,
 .login {
@@ -2052,15 +2052,15 @@ input[type="checkbox"] {
 }
 .login-brand {
   font-family: inherit;
-  color: #17541f;
+  color: #2a3644;
 }
 .login-card {
   box-shadow: 0 1px 3px #0000000d;
   border-color: #dee2e6;
 }
 .login-roles button:hover {
-  background: #eaf0eb;
-  border-color: #17541f;
+  background: #ecedee;
+  border-color: #2a3644;
 }
 .block.heading p {
   font-family: inherit;
@@ -2077,10 +2077,10 @@ input[type="checkbox"] {
   font-size: 20px;
 }
 .search-feature form button {
-  background: #17541f;
+  background: #2a3644;
 }
 .text-button {
-  color: #17541f;
+  color: #2a3644;
 }
 .activity p,
 .activity time,
@@ -2374,12 +2374,12 @@ nav button {
 }
 .main-footer {
   font-size: 12px;
-  color: #92a499;
+  color: #979b9f;
   line-height: 1.7;
 }
 .row-link strong {
   font-family: inherit;
-  color: #17541f;
+  color: #2a3644;
   font-size: 14px;
 }
 .eyebrow,
@@ -2407,7 +2407,7 @@ nav button {
 }
 .semantic-result strong {
   font-weight: 600;
-  color: #17541f;
+  color: #2a3644;
   font-size: 14px;
 }
 .empty h3 {
